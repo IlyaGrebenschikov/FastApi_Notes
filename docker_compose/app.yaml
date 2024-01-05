@@ -6,22 +6,28 @@ services:
     build: ..
     ports:
       - 8080:8080
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=test_db
     volumes:
-      - ..:/code
-    command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8080
+      - ..:/Fastapi_Notes
+    command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8080
     depends_on:
       - db
 
   db:
     image: postgres:latest
     expose:
-      - 8000
+      - 5432
     environment:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=test_db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 25432:5432
 
 volumes:
   postgres_data:

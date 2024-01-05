@@ -13,5 +13,7 @@ app = FastAPI(
 app.include_router(UserRouter.router, prefix='/user')
 app.include_router(NoteRouter.router, prefix='/note')
 
-if __name__ == "__main__":
-    uvicorn.run('main:app', host='0.0.0.0', port=5000, reload=True)
+# if __name__ == "__main__":
+#     uvicorn.run('main:app', host='0.0.0.0', port=8001, reload=True)
+
+#start project - uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8001
