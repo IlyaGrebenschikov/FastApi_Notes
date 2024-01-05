@@ -10,6 +10,7 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=test_db
+      - POSTGRES_HOST=db
     volumes:
       - ..:/Fastapi_Notes
     command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8080
@@ -24,6 +25,7 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=test_db
+      - POSTGRES_HOST=db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:

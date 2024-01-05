@@ -3,7 +3,7 @@ from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import URL
 
-from app.config import POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD
+from app.config import POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST
 
 
 url_obj = URL.create(
@@ -11,7 +11,7 @@ url_obj = URL.create(
     username=POSTGRES_USER,
     password=POSTGRES_PASSWORD,
     database=POSTGRES_DB,
-    host='db',
+    host=POSTGRES_HOST,
     port=5432
 )
 
