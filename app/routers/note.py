@@ -1,10 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from database import get_db
+from app.database import get_db
 
-from services import note as NoteService
-from dto import note as NoteDTO
-
+from app.services import note as NoteService
+from app.dto import note as NoteDTO
 
 router = APIRouter()
 

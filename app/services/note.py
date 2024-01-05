@@ -1,6 +1,6 @@
-from models.note import Note
+from app.models.note import Note
 from sqlalchemy.orm import Session
-from dto import note
+from app.dto import note
 
 
 def create_note(data: note.Note, db: Session, id: int):
