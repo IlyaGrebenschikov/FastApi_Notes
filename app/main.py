@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-import uvicorn
+# import uvicorn
 from app.database import session, engine, Base, get_db
 from app.routers import user as UserRouter
 from app.routers import note as NoteRouter
