@@ -6,4 +6,3 @@ class Note(BaseModel):
     subtitle: str
     introduction: str
     main_text: str
-    

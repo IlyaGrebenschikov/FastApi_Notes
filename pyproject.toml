@@ -1,19 +1,15 @@
 [tool.poetry]
-name = "fastapi-notes"
+name = "fastapi-refactor"
 version = "0.1.0"
 description = ""
-authors = ["Ilya"]
+authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
 fastapi = {extras = ["all"], version = "^0.108.0"}
-sqlalchemy = {extras = ["all"], version = "^2.0.24"}
-pg8000 = "^1.30.3"
-psycopg2-binary = "^2.9.9"
+sqlalchemy = {extras = ["all"], version = "^2.0.25"}
 asyncpg = "^0.29.0"
-psycopg = "^3.1.16"
-alembic = "^1.13.1"
 
 
 [build-system]
