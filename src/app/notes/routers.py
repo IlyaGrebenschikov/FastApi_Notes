@@ -9,7 +9,8 @@ from src.app.notes import NoteSchemas
 
 
 router = APIRouter(
-    tags=['note'],
+    tags=['notes'],
+    prefix='/notes'
 )
 
 
@@ -23,7 +24,7 @@ async def get(id: int = None, db: AsyncSession = Depends(get_session)):
     return note_service.get_notes(id, db)
 
 
-@router.put('/{id}]')
+@router.put('/{id}')
 async def update(data: NoteSchemas = None, db: AsyncSession = Depends(get_session), note_id: int = None, user_id: int = None):
     return note_service.update(data, db, note_id, user_id)
 

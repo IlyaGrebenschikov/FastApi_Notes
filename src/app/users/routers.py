@@ -7,7 +7,8 @@ from src.app.users import UserSchemas
 
 
 router = APIRouter(
-    tags=['user']
+    tags=['users'],
+    prefix='/users'
 )
 
 
