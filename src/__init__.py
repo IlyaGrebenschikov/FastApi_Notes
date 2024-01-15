@@ -2,4 +2,4 @@ __all__ = (
     'app'
 )
 
-import app
+from src import app
