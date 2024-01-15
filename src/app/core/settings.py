@@ -15,7 +15,7 @@ class DbSettings(BaseSettings):
         env_file_encoding='utf-8',
     )
     DB_HOST: str
-    DB_PORT: int
+    DB_PORT: str
     DB_USER: str
     DB_PASS: str
     DB_NAME: str
