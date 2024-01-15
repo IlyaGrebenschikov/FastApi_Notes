@@ -1,49 +1,80 @@
+from typing import Optional, Any
+
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.app.notes import NoteModels
 from src.app.notes import NoteSchemas
 
+from sqlalchemy import select, delete
 
-def create_note(data: NoteSchemas, db: AsyncSession, id: int):
-    note = NoteModels(
-        title=data.title,
-        subtitle=data.subtitle,
-        introduction=data.introduction,
-        main_text=data.main_text,
-        user_id=id
-    )
+
+async def create_note(user_id: int, data: NoteSchemas, db: AsyncSession) -> Optional[NoteModels | dict]:
+    note = NoteModels(**data.model_dump())
+    note.user_id = user_id
 
     try:
         db.add(note)
-        db.commit()
-        db.refresh(note)
+        await db.commit()
+        await db.refresh(note)
     except Exception as e:
         print(e)
+        return {
+            'result': 'status 500',
+        }
 
     return note
 
 
-def get_notes(id: int, db: AsyncSession):
-    return db.query(NoteModels).filter(NoteModels.user_id == id).all()
+async def get_notes(user_id: int, limit: int, db: AsyncSession) -> Optional[NoteModels | Any]:
+    stmt = (
+        select(NoteModels).
+        filter(NoteModels.user_id == user_id).
+        limit(limit)
+    )
+    result = await db.execute(stmt)
+    note = result.scalars().all()
+
+    return note
 
 
-def update(data: NoteSchemas, db: AsyncSession, note_id: int, user_id: int):
-    note = db.query(NoteModels).filter(NoteModels.user_id == user_id, NoteModels.id == note_id).first()
+async def get_note(user_id: int, note_id: int, db: AsyncSession) -> Optional[NoteModels]:
+    stmt = (
+        select(NoteModels).
+        filter(NoteModels.user_id == user_id, NoteModels.id == note_id)
+    )
+    result = await db.execute(stmt)
+    note = result.scalar()
+
+    return note
+
+
+async def update(user_id: int, note_id: int, data: NoteSchemas, db: AsyncSession) -> Optional[NoteModels | Any]:
+    stmt = (
+        select(NoteModels).
+        filter(NoteModels.user_id == user_id, NoteModels.id == note_id)
+    )
+    result = await db.execute(stmt)
+
+    note = result.scalars().one()
     note.title = data.title
     note.subtitle = data.subtitle
-    note.introduction = data.introduction
     note.main_text = data.main_text
 
-    db.add(note)
-    db.commit()
-    db.refresh(note)
+    await db.commit()
+    await db.refresh(note)
 
     return note
 
 
-def remove(db: AsyncSession, note_id: int, user_id):
-    note = db.query(NoteModels).filter(NoteModels.user_id == user_id, NoteModels.id == note_id).delete()
+async def remove(user_id: int, note_id: int, db: AsyncSession) -> Optional[NoteModels | Any]:
+    stmt = (
+        delete(NoteModels).
+        filter(NoteModels.user_id == user_id, NoteModels.id == note_id)
+    )
 
-    db.commit()
-
-    return note
+    await db.execute(stmt)
+    await db.commit()
+    
+    return {
+        'result': 'deleted'
+    }

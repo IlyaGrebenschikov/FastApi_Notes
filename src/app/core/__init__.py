@@ -1,5 +1,6 @@
 __all__ = (
-    'get_settings'
+    'get_settings',
+
 )
 
 from src.app.core.settings import get_settings

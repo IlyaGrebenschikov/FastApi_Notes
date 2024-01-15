@@ -5,6 +5,8 @@ from functools import lru_cache
 
 from pathlib import Path
 
+from sqlalchemy import URL
+
 
 class DbSettings(BaseSettings):
     root_dir: DirectoryPath = Path(__file__).parent.parent.parent.parent
@@ -17,16 +19,17 @@ class DbSettings(BaseSettings):
     DB_USER: str
     DB_PASS: str
     DB_NAME: str
-    DB_URL: str
 
-    def db_url(self):
-        return self.DB_URL.format(
-            db_user=self.DB_USER,
-            db_pass=self.DB_PASS,
-            db_host=self.DB_HOST,
-            db_port=self.DB_PORT,
-            db_name=self.DB_NAME,
+    def create_url(self):
+        url_obj = URL.create(
+            'postgresql+psycopg',
+            username=self.DB_USER,
+            password=self.DB_PASS,
+            database=self.DB_NAME,
+            host=self.DB_HOST,
+            port=self.DB_PORT
         )
+        return url_obj
 
 
 class Settings(BaseSettings):

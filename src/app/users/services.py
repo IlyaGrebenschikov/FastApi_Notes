@@ -3,38 +3,44 @@ from src.app.users import UserSchemas
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from typing import Optional
 
-def create_user(data: UserSchemas, db: AsyncSession):
-    user = UserModels(name=data.name)
+
+async def create_user(data: UserSchemas, db: AsyncSession) -> Optional[UserModels]:
+    user = UserModels(**data.model_dump())
 
     try:
         db.add(user)
-        db.commit()
-        db.refresh(user)
+        await db.commit()
+        await db.refresh(user)
     except Exception as e:
         print(e)
 
     return user
 
 
-def get_user(id: int, db: AsyncSession):
-    return db.query(UserModels).filter(UserModels.id == id).first()
+async def get_user(user_id: int, db: AsyncSession) -> Optional[UserModels]:
+    user = await db.get(UserModels, user_id)
+
+    return user
 
 
-def update(data: UserSchemas, db: AsyncSession, id: int):
-    user = db.query(UserModels).filter(UserModels.id == id).first()
+async def update(user_id: int, data: UserSchemas, db: AsyncSession) -> Optional[UserModels]:
+    user = await get_user(user_id, db)
     user.name = data.name
 
-    db.add(user)
-    db.commit()
-    db.refresh(user)
+    await db.commit()
+    await db.refresh(user)
 
     return user
 
 
-def remove(db: AsyncSession, id: int):
-    user = db.query(UserModels).filter(UserModels.id == id).delete()
+async def remove(user_id: int, db: AsyncSession) -> Optional[UserModels | dict]:
+    user = await get_user(user_id, db)
 
-    db.commit()
+    await db.delete(user)
+    await db.commit()
 
-    return user
+    return {
+        'result': 'deleted'
+    }
