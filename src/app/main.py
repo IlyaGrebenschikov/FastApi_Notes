@@ -10,8 +10,8 @@ from src.app.database import init_db
 app = FastAPI(
     title='FastAPI_Notes'
 )
-app.include_router(user_router)
 app.include_router(note_router)
+app.include_router(user_router)
 
 
 @app.on_event("startup")

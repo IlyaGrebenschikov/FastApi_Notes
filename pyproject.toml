@@ -1,19 +1,18 @@
 [tool.poetry]
-name = "fastapi-refactor"
+name = "fast_api_notes"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
-readme = "README.md"
+authors = ["Ilya"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-fastapi = {extras = ["all"], version = "^0.108.0"}
-sqlalchemy = {extras = ["all"], version = "^2.0.25"}
-asyncpg = "^0.29.0"
+SQLAlchemy = {extras = ["all"], version = "^2.0.25"}
 psycopg = "^3.1.17"
-alembic = {extras = ["all"], version = "^1.13.1"}
+fastapi = {extras = ["all"], version = "^0.109.0"}
+alembic = "^1.13.1"
 
+[tool.poetry.dev-dependencies]
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
