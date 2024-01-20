@@ -14,20 +14,20 @@ class DbSettings(BaseSettings):
         env_file=f'{root_dir}/.env',
         env_file_encoding='utf-8',
     )
-    DB_HOST: str
-    DB_PORT: str
-    DB_USER: str
-    DB_PASS: str
-    DB_NAME: str
+    POSTGRES_HOST: str
+    POSTGRES_PORT: str
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
+    POSTGRES_DB: str
 
     def create_url(self):
         url_obj = URL.create(
             'postgresql+psycopg',
-            username=self.DB_USER,
-            password=self.DB_PASS,
-            database=self.DB_NAME,
-            host=self.DB_HOST,
-            port=self.DB_PORT
+            username=self.POSTGRES_USER,
+            password=self.POSTGRES_PASSWORD,
+            database=self.POSTGRES_DB,
+            host=self.POSTGRES_HOST,
+            port=self.POSTGRES_PORT
         )
         return url_obj
 

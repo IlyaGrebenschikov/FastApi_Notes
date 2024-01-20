@@ -2,7 +2,7 @@ __all__ = (
     'core',
     'database',
     'notes',
-    'users'
+    'users',
 )
 
 import app.core

@@ -1,10 +1,4 @@
-from config import create_project_root
-
-create_project_root()
-
 from fastapi import FastAPI
-
-import uvicorn
 
 from app.users import user_router
 from app.notes import note_router
@@ -23,5 +17,5 @@ async def on_startup():
     await init_db()
 
 
-if __name__ == '__main__':
-    uvicorn.run('main:app', reload=True)
+# uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8080
+# sudo docker compose -f docker_compose.yaml up --build
