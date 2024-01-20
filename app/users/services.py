@@ -1,5 +1,5 @@
-from src.app.users import UserModels
-from src.app.users import UserSchemas
+from app.users import UserModels
+from app.users import UserSchemas
 
 from sqlalchemy.ext.asyncio import AsyncSession
 

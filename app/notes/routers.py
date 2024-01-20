@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.app.database import get_session
-from src.app.notes import NoteSchemas
-from src.app.notes import note_service
+from app.database import get_session
+from app.notes import NoteSchemas
+from app.notes import note_service
 
 router = APIRouter(
     tags=['notes'],

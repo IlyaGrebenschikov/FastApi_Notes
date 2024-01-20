@@ -3,7 +3,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 
-from src.app.database import Base
+from app.database import Base
 
 
 class Note(Base):

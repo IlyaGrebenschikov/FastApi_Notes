@@ -2,8 +2,8 @@ from typing import Optional, Any
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.app.notes import NoteModels
-from src.app.notes import NoteSchemas
+from app.notes import NoteModels
+from app.notes import NoteSchemas
 
 from sqlalchemy import select, delete
 

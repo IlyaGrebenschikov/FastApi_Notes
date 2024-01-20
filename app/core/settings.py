@@ -9,7 +9,7 @@ from sqlalchemy import URL
 
 
 class DbSettings(BaseSettings):
-    root_dir: DirectoryPath = Path(__file__).parent.parent.parent.parent
+    root_dir: DirectoryPath = Path(__file__).parent.parent.parent
     model_config = SettingsConfigDict(
         env_file=f'{root_dir}/.env',
         env_file_encoding='utf-8',
