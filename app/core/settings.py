@@ -15,14 +15,15 @@ class DbSettings(BaseSettings):
         env_file_encoding='utf-8',
     )
     POSTGRES_HOST: str
-    POSTGRES_PORT: str
+    POSTGRES_PORT: int
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str
+    DB_URL: str
 
-    def create_url(self):
+    def create_url(self) -> URL:
         url_obj = URL.create(
-            'postgresql+psycopg',
+            'postgresql+asyncpg',
             username=self.POSTGRES_USER,
             password=self.POSTGRES_PASSWORD,
             database=self.POSTGRES_DB,
@@ -30,6 +31,16 @@ class DbSettings(BaseSettings):
             port=self.POSTGRES_PORT
         )
         return url_obj
+
+    @property
+    def get_url(self) -> str:
+        return self.DB_URL.format(
+            POSTGRES_USER=self.POSTGRES_USER,
+            POSTGRES_PASSWORD=self.POSTGRES_PASSWORD,
+            POSTGRES_HOST=self.POSTGRES_HOST,
+            POSTGRES_PORT=self.POSTGRES_PORT,
+            POSTGRES_DB=self.POSTGRES_DB,
+            )
 
 
 class Settings(BaseSettings):

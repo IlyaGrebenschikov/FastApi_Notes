@@ -42,6 +42,29 @@ test = ["anyio", "coverage[toml] (>=7)", "exceptiongroup (>=1.2.0)", "hypothesis
 trio = ["trio (>=0.23)"]
 
 [[package]]
+name = "async-timeout"
+version = "4.0.3"
+description = "Timeout context manager for asyncio programs"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
+name = "asyncpg"
+version = "0.29.0"
+description = "An asyncio PostgreSQL driver"
+category = "main"
+optional = false
+python-versions = ">=3.8.0"
+
+[package.dependencies]
+async-timeout = {version = ">=4.0.3", markers = "python_version < \"3.12.0\""}
+
+[package.extras]
+docs = ["Sphinx (>=5.3.0,<5.4.0)", "sphinxcontrib-asyncio (>=0.3.0,<0.4.0)", "sphinx-rtd-theme (>=1.2.2)"]
+test = ["flake8 (>=6.1,<7.0)", "uvloop (>=0.15.3)"]
+
+[[package]]
 name = "certifi"
 version = "2023.11.17"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -509,12 +532,14 @@ python-versions = ">=3.8"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "c129649a4fdd2f639c7f9cfa24eed7ed29aebdcb71773573493a2adb26f933a0"
+content-hash = "f61e4665eaa77f5009d3de41112388d5dd94ced264ee33e4c50b9a6987a594fb"
 
 [metadata.files]
 alembic = []
 annotated-types = []
 anyio = []
+async-timeout = []
+asyncpg = []
 certifi = []
 click = []
 colorama = []
