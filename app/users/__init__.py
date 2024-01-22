@@ -3,6 +3,7 @@ __all__ = (
     'UserSchemas',
     'user_services',
     'user_router',
+    'get_user'
 )
 
 from app.users.models import User as UserModels
