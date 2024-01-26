@@ -22,5 +22,12 @@ app.include_router(user_router)
 app.include_router(note_router)
 
 
+@app.get('/')
+async def hello() -> dict:
+    return {
+        'hello': 'world'
+    }
+
+
 # uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8080
 # sudo docker compose -f docker_compose.yaml up --build

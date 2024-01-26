@@ -11,6 +11,10 @@ psycopg = "^3.1.17"
 fastapi = {extras = ["all"], version = "^0.109.0"}
 alembic = "^1.13.1"
 asyncpg = "^0.29.0"
+pytest = "^7.4.4"
+trio = "^0.24.0"
+asgi-lifespan = "2.*"
+pytest-asyncio = "^0.23.3"
 
 [tool.poetry.dev-dependencies]
 
