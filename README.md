@@ -1,5 +1,5 @@
 # Async CRUD Application
-Simple backend template with FastAPI, PostgreSQL, SQLAlchemy and Alembic
+Simple CRUD application with FastAPI, PostgreSQL, SQLAlchemy and Alembic
 
 Setup:
 
