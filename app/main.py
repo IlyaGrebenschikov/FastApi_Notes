@@ -6,11 +6,13 @@ from app.users import user_router
 from app.notes import note_router
 
 from app.database import init_db
+from app.database import init_redis
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
+    await init_redis()
     yield
 
 
