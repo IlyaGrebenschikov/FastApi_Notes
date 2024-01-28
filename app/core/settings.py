@@ -8,18 +8,26 @@ from pathlib import Path
 from sqlalchemy import URL
 
 
-class DbSettings(BaseSettings):
+class EnvSettings(BaseSettings):
     root_dir: DirectoryPath = Path(__file__).parent.parent.parent
     model_config = SettingsConfigDict(
         env_file=f'{root_dir}/.env',
         env_file_encoding='utf-8',
     )
+
     POSTGRES_HOST: str
     POSTGRES_PORT: int
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str
     DB_URL: str
+
+    REDIS_HOST: str
+    REDIS_PORT: int
+    REDIS_URL: str
+
+
+class DbSettings(EnvSettings):
 
     def create_url(self) -> URL:
         url_obj = URL.create(
@@ -43,8 +51,20 @@ class DbSettings(BaseSettings):
             )
 
 
-class Settings(BaseSettings):
+class RedisSettings(EnvSettings):
+
+    @property
+    def get_url(self) -> str:
+        return self.REDIS_URL.format(
+            REDIS_HOST=self.REDIS_HOST,
+            REDIS_PORT=self.REDIS_PORT,
+        )
+
+
+class Settings:
+    env: EnvSettings = EnvSettings()
     db: DbSettings = DbSettings()
+    redis: RedisSettings = RedisSettings()
 
 
 @lru_cache(typed=True)
