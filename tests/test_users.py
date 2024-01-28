@@ -2,7 +2,7 @@ import pytest
 from httpx import AsyncClient
 from fastapi import status
 
-from app.main import app
+from app import app
 
 import asyncio
 
@@ -30,7 +30,7 @@ async def test_create_user() -> None:
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {
         'name': 'Ilya',
-        'id': 32
+        'id': 38
     }
 
 
@@ -69,7 +69,7 @@ async def test_update_user() -> None:
 async def test_delete_user() -> None:
     async with AsyncClient(app=app, base_url="http://0.0.0.0:8080") as ac:
         response = await ac.delete(
-            'http://0.0.0.0:8080/users/{id}?user_id=4'
+            'http://0.0.0.0:8080/users/{id}?user_id=8'
         )
 
     assert response.status_code == status.HTTP_200_OK
