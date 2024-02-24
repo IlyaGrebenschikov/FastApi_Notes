@@ -3,7 +3,7 @@ Simple CRUD application with PostgreSQL Redis and SQLAlchemy.
 
 Setup:
 
-`docker compose -f docker_compose.yaml up`
+`docker compose -f docker-compose.yaml up`
 
 Env-file:
 
