@@ -1,5 +1,5 @@
-# Async CRUD Application
-Simple CRUD application with FastAPI, PostgreSQL, SQLAlchemy and Alembic
+# Async FastAPI CRUD Application
+Simple CRUD application with PostgreSQL Redis and SQLAlchemy.
 
 Setup:
 
